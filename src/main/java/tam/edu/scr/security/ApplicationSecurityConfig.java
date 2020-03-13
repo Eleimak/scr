@@ -52,21 +52,21 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                             .username("user")
                             .password(passwordEncoder.encode("user"))
                             .roles(USER.name())
-                            //.authorities(USER.getGrantedAuthorities())
+                            .authorities(USER.getGrantedAuthorities())
                             .build();
         UserDetails doctor = User
                             .builder()
                             .username("doctor")
                             .password(passwordEncoder.encode("doctor"))
                             .roles(DOCTOR.name())
-                            //.authorities(DOCTOR.getGrantedAuthorities())
+                            .authorities("PERSON_READ")
                             .build();
         UserDetails admin = User
                             .builder()
                             .username("admin")
                             .password(passwordEncoder.encode("admin"))
-                            //.roles(ADMIN.name())
-                            .authorities(ADMIN.getGrantedAuthorities())
+                            .roles(ADMIN.name())
+                            .authorities("PERSON_READ")
                             .build();
         return  new InMemoryUserDetailsManager(user, doctor, admin);
     }
